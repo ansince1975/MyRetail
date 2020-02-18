@@ -1,0 +1,123 @@
+# MyRetail Case Study
+
+This MyRetail Case Study service is a Spring Boot application to expose REST APIs to GET and PUT Product Details in a NoSql Database
+
+## To Make it work end to end
+
+Please do the following
+
+## Install Cassandra 
+
+I have used Mac OS to demonstrate this application.
+Please follow the steps below to being up a single node Cassandra instance.
+
+1. Open Terminal and run the following command
+```command
+brew install cassandra
+```
+
+2. Once done navigate to the following location
+```command
+/usr/local/etc/cassandra
+```
+
+3. Start Cassandra Locally
+```command
+brew services start cassandra
+```
+
+4. Once Started, Issue the following command to get CQL prompt
+```command
+cqlsh
+```
+
+5. Create Keyspace. Keyspace is similar to Schema in traditional RDBMS.
+```command
+cqlsh> create keyspace pricedemo with replication = {'class':'SimpleStrategy','replication_factor':1};
+```
+
+6. Set the Default Keyspace
+```command
+cqlsh> use pricedemo;
+```
+
+7. Create table Product_price to hold some data for the demo
+```command
+cqlsh:pricedemo> create table product_price(productid varchar primary key, price varchar, currency_code varchar);
+```
+
+8. Run the following insert statements to create records
+```command
+cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1111','199.99','USD');
+cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1112','299.99','USD');
+cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1113','399.99','USD');
+cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('13860428','399.99','USD');
+```
+
+
+## Clone the Application
+
+. Using git clone command, Clone the application using the URL
+. Navigate the project folder.
+. git checkout master
+
+## run the application.
+
+1. Open the project in IntelliJ or the IDE of your choice
+2. Start the application as Springboot application.
+
+## Test the application
+
+I have used postman for this purpose
+To use Postman, bring up the postman and issue the following commands.
+
+```GET
+GET http://localhost:9100/products/13860428
+```
+
+and the response will ve (for valid product id)
+```
+{
+    "id": 13860428,
+    "name": "\"The Big Lebowski (Blu-ray)\"",
+    "current_price": {
+        "value": 1111.99,
+        "currencyCode": "\"usd\""
+    }
+}
+```
+
+for invalid product id
+```
+{
+    "errorDescription": "ProductPriceEntity Not Found",
+    "errorDetails": [
+        "404 Not Found"
+    ]
+}
+```
+
+and now issue a PUT command
+```PUT
+PUT http://localhost:9100/products/updateproduct/13860428/price
+
+and Body 
+{
+    "id": 13860428,
+    "name": "\"The Big Lebowski (Blu-ray)\"",
+    "current_price": {
+        "value": 1111.99,
+        "currencycode":"usd"
+    }
+}
+
+with data type as JSON(application/json)
+```
+Successful update will return the Updated Project JSon back and status code of 200
+
+
+
+
+
+
+ 
