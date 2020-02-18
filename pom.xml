@@ -55,18 +55,20 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--region Swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <!--endregion-->
 
-        <!--<dependency>-->
-            <!--<groupId>com.datastax.oss</groupId>-->
-            <!--<artifactId>java-driver-core</artifactId>-->
-            <!--<version>4.1.0</version>-->
-        <!--</dependency>-->
 
-        <!--<dependency>-->
-            <!--<groupId>com.datastax.oss</groupId>-->
-            <!--<artifactId>java-driver-query-builder</artifactId>-->
-            <!--<version>4.1.0</version>-->
-        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
