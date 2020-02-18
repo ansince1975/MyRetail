@@ -2,7 +2,7 @@
 
 This MyRetail Case Study service is a Spring Boot application to expose REST APIs to GET product details from a target redsky endpoint and NoSql DB and PUT Product pricing in a NoSql Database
 
-[Flow Diagram] (docs/flowdiagram.png)
+![Flow Diagram](docs/flowdiagram.png)
 
 ## How to use this service?
 
@@ -126,7 +126,10 @@ Successful update will return the Updated Project JSon back and status code of 2
 If a product is not found in Cassandra, by PUT standard, it will create a new entry in DB table.
 
 
+##Using Swagger
 
+Open any browser http://localhost:9100/swagger-ui.html
+and remaining is self explanatory
 
 
 
