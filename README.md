@@ -1,15 +1,21 @@
 # MyRetail Case Study
 
-This MyRetail Case Study service is a Spring Boot application to expose REST APIs to GET and PUT Product Details in a NoSql Database
+This MyRetail Case Study service is a Spring Boot application to expose REST APIs to GET product details from a target redsky endpoint and NoSql DB and PUT Product pricing in a NoSql Database
 
-## To Make it work end to end
+## How to use this service?
 
-Please do the following
+Please follow the instructions below.
+What is needed?
+
+Java Major Version : 1.8
+IDE : IntelliJ Idea
+NoSql Database : Cassandra
+To Test : Postman
 
 ## Install Cassandra 
 
-I have used Mac OS to demonstrate this application.
-Please follow the steps below to being up a single node Cassandra instance.
+I have used Mac OS laptop to demonstrate this application.
+Please follow the steps below to bring up a single node Cassandra instance. (Mac OS)
 
 1. Open Terminal and run the following command
 ```command
@@ -36,34 +42,34 @@ cqlsh
 cqlsh> create keyspace pricedemo with replication = {'class':'SimpleStrategy','replication_factor':1};
 ```
 
-6. Set the Default Keyspace
+6. Set the Default Keyspace. Once this is done, all our DB objects will be created in the default keyspace that is set.
 ```command
 cqlsh> use pricedemo;
 ```
 
-7. Create table Product_price to hold some data for the demo
+7. Create table ProductPriceEntity to hold some data for the demo
 ```command
-cqlsh:pricedemo> create table product_price(productid varchar primary key, price varchar, currency_code varchar);
+cqlsh:pricedemo> create table productpriceentity(productid varchar primary key, price varchar, currency_code varchar);
 ```
 
 8. Run the following insert statements to create records
 ```command
-cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1111','199.99','USD');
-cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1112','299.99','USD');
-cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('1113','399.99','USD');
-cqlsh:pricedemo> insert into product_price (productid, price, currency_code) values ('13860428','399.99','USD');
+cqlsh:pricedemo> insert into productpriceentity (productid, price, currency_code) values ('1111','199.99','USD');
+cqlsh:pricedemo> insert into productpriceentity (productid, price, currency_code) values ('1112','299.99','USD');
+cqlsh:pricedemo> insert into productpriceentity (productid, price, currency_code) values ('1113','399.99','USD');
+cqlsh:pricedemo> insert into productpriceentity (productid, price, currency_code) values ('13860428','399.99','USD');
 ```
 
 
 ## Clone the Application
 
 . Using git clone command, Clone the application using the URL
-. Navigate the project folder.
+. Navigate to the project folder.
 . git checkout master
 
 ## run the application.
 
-1. Open the project in IntelliJ or the IDE of your choice
+1. Open the project in IntelliJ Idea or the IDE of your choice
 2. Start the application as Springboot application.
 
 ## Test the application
@@ -75,7 +81,7 @@ To use Postman, bring up the postman and issue the following commands.
 GET http://localhost:9100/products/13860428
 ```
 
-and the response will ve (for valid product id)
+and the response will be (for valid product id)
 ```
 {
     "id": 13860428,
@@ -114,6 +120,8 @@ and Body
 with data type as JSON(application/json)
 ```
 Successful update will return the Updated Project JSon back and status code of 200
+
+If a product is not found in Cassandra, by PUT standard, it will create a new entry in DB table.
 
 
 
