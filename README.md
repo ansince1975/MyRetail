@@ -2,7 +2,7 @@
 
 This MyRetail Case Study service is a Spring Boot application to expose REST APIs to GET product details from a target redsky endpoint and NoSql DB and PUT Product pricing in a NoSql Database
 
-Flow Diagram (docs/flowdiagram.png)
+Flow Diagram (flowdiagram.png)
 
 ## How to use this service?
 
